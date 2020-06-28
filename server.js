@@ -11,6 +11,14 @@ app.use(express.static(join(__dirname, 'client', 'build')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+// bring in routes
+app.use(require('./routes'))
+
+// extra route to re-route to homepage
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
+})
+
 //bring in mongoose connection 
 require('mongoose').connect(process.env.MONGODB_URI || process.env.LOCAL_URI, {
   useNewUrlParser: true,
