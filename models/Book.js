@@ -8,7 +8,7 @@ const BookSchema = new Schema({
   description: String,
   image: String,
   link: String,
-  id: String
+  bookId: String
 })
 
 // export out the Book model
