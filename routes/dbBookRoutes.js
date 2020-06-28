@@ -1,3 +1,5 @@
+// routes that manage custom book data
+
 // custom for gif data from db
 const router = require('express').Router()
 
