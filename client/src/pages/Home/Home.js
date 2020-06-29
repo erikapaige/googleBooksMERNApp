@@ -1,5 +1,7 @@
 // bring in react and useState hook
 import React, { useState } from 'react'
+// bring in component from react-router
+import { Link } from 'react-router-dom'
 // bring in axios
 import axios from 'axios'
 // bring in components from material-ui
@@ -13,8 +15,6 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import CardHeader from '@material-ui/core/CardHeader'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +51,12 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: 'inherit',
+  },
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -108,36 +114,38 @@ const Home = () => {
       <div>
         {
           bookState.books.map(book =>(
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="book cover"
-                height="140"
-                image={book.volumeInfo.imageLinks.thumbnail}
-                // <img src={book.volumeInfo.imageLinks.thumbnail} />
-              />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {book.volumeInfo.title}
-              </Typography>
-              <Typography gutterBottom variant="h2" component="h2">
-                {book.volumeInfo.authors}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {book.volumeInfo.description}
-              </Typography>
-            </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                `View More Info${book.volumeInfo.infoLink}`
-              </Button>
-              <Button size="small" color="primary">
-                Save
-              </Button>
-            </CardActions>
-        </Card>
+            <Card className={classes.root}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="book cover"
+                  height="140"
+                  image={book.volumeInfo.imageLinks.thumbnail}
+                />
+              <CardContent>
+                <Typography gutterBottom variant="h4" component="h2">
+                  {book.volumeInfo.title}
+                </Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  {book.volumeInfo.authors}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {book.volumeInfo.description}
+                </Typography>
+              </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button 
+                  size="small" 
+                  color="primary"
+                  href={book.volumeInfo.infoLink}>
+                    View More Info
+                </Button>
+                <Button size="small" color="primary">
+                  Save
+                </Button>
+              </CardActions>
+          </Card>
         ))
         }
       </div>
