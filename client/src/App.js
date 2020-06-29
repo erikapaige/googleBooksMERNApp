@@ -13,20 +13,23 @@ import Saved from './pages/Saved'
 
 
 const App = () =>{
+  
   return(
-    <Router>
-      <div>
-        <Navbar />
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path='/saved'>
-            <Saved />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/saved'>
+              <Saved />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+
   )
 }
 

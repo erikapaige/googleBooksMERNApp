@@ -2,22 +2,18 @@
 import React from 'react'
 // bring in component from react-router
 import { Link } from 'react-router-dom'
-// bring in navbarcss
-import './Navbar.css'
 // bring in components from material-ui
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import InputBase from '@material-ui/core/InputBase'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
-
+// setting styling rules for material components
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -97,7 +93,7 @@ const Navbar = () => {
             aria-label="open drawer"
           >
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-              <MenuIcon className='iconMenu' />
+              <MenuIcon className={classes.iconMenu} />
             </Button>
               <Menu
                 id="simple-menu"
@@ -117,7 +113,7 @@ const Navbar = () => {
           <Typography className={classes.title} variant="h6" noWrap>
             Book Search
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -129,7 +125,7 @@ const Navbar = () => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>
