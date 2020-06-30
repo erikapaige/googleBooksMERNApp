@@ -5,74 +5,40 @@ import { Link } from 'react-router-dom'
 // bring in axios
 import axios from 'axios'
 // bring in components from material-ui
-import { fade, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
-import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      // width: '25ch',
-      maxWidth: 400,
-    },
+    flexGrow: 1,
   },
-  form:{
-    margin: 20,
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 500,
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
+  image: {
+    width: 128,
+    height: 128,
   },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    marginLeft: theme.spacing(10),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  media: {
-    height: 140,
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
 }))
 
 const Home = () => {
+  
+  // setting styles for material-ui components
   const classes = useStyles()
   
   //search for book
@@ -98,6 +64,7 @@ const Home = () => {
       .catch(err => console.error(err))
   }
 
+  // function to save book
   bookState.handleSaveBook = book => {
     console.log(book)
 
@@ -142,41 +109,52 @@ const Home = () => {
       <div>
         {
           bookState.books.map(book => (
-            <Card key={book.id} className={classes.root}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="book cover"
-                  height="140"
-                  image={book.volumeInfo.imageLinks.thumbnail}
-                />
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="h2">
-                  {book.volumeInfo.title}
-                </Typography>
-                <Typography gutterBottom variant="h6" component="h2">
-                  {book.volumeInfo.authors}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {book.volumeInfo.description}
-                </Typography>
-              </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button 
-                  size="small" 
-                  color="primary"
-                  href={book.volumeInfo.infoLink}>
-                    View More Info
-                </Button>
-                <Button 
-                  size="small" 
-                  color="primary"
-                  onClick={() => bookState.handleSaveBook(book)}>
-                  Save
-                </Button>
-              </CardActions>
-          </Card>
+            <div key={book.id} className={classes.root}>
+             <Paper className={classes.paper}>
+               <Grid container spacing={2}>
+                 <Grid item>
+                   <CardMedia 
+                    className={classes.image}
+                    image={book.volumeInfo.imageLinks.thumbnail} 
+                    alt="book cover" />
+                 </Grid>
+                 <Grid item xs={12} sm container>
+                   <Grid item xs container direction="column" spacing={2}>
+                     <Grid item xs>
+                       <Typography gutterBottom variant="h5">
+                          {book.volumeInfo.title}
+                       </Typography>
+                       <Typography gutterBottom variant="h6">
+                          {book.volumeInfo.authors}
+                       </Typography>
+                       <Typography variant="body2" gutterBottom>
+                          {book.volumeInfo.description}
+                       </Typography>
+                       <Typography variant="body2" color="textSecondary">
+                          {book.link}
+                       </Typography>
+                     </Grid>
+                     <Grid item>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          color="primary"
+                          href={book.volumeInfo.infoLink}>
+                            View More Info
+                        </Button>
+                        <Button
+                          size="small"
+                          color="primary"
+                          onClick={() => bookState.handleSaveBook(book)}>
+                            Save
+                        </Button>
+                      </CardActions>
+                     </Grid>
+                   </Grid>
+                 </Grid>
+               </Grid>
+             </Paper>
+           </div>
         ))
         }
       </div>
