@@ -42,6 +42,18 @@ const Saved = () => {
     books: []
   })
 
+  // function to delete
+  bookState.handleDeleteBook= book =>{
+    // console.log(book)
+    axios.delete(`/api/books/${book._id}`)
+      .then(() =>{
+        const books = JSON.parse(JSON.stringify(bookState.books))
+        const booksFiltered = books.filter(boock => boock._id !== book._id)
+        setBookState({ ...bookState, books: booksFiltered})
+      })
+      .catch(err => console.error(err))
+  }
+  
   // function on page load to get saved books
   useEffect(() => {
     axios.get('/api/books')
@@ -60,10 +72,11 @@ const Saved = () => {
             <Paper className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item>
-                  <CardMedia
-                    className={classes.image}
+                  <CardMedia>
+                    <img className={classes.image}
                     image={book.source}
                     alt="book cover" />
+                  </CardMedia>
                 </Grid>
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
@@ -92,7 +105,7 @@ const Saved = () => {
                         <Button
                           size="small"
                           color="primary"
-                          onClick={() => bookState.handleSaveBook(book)}>
+                          onClick={() => bookState.handleDeleteBook(book)}>
                           Delete
                         </Button>
                       </CardActions>
