@@ -96,7 +96,23 @@ const Home = () => {
       .catch(err => console.error(err))
   }
 
-
+  bookState.handleSaveBook = book => {
+    // console.log(book)
+    axios.post('/api/books', {
+      title: book.title,
+      authors: book.authors,
+      description: book.description,
+      image: book.image,
+      link: book.link,
+      bookId: book.id,
+    })
+      .then(() =>{
+        const books = bookState.books
+        const booksFiltered= books.filter(boock => boock.id !== book.id)
+        setBookState({ ...bookState, books: booksFiltered })
+      })
+      .catch(err => console.error(err))
+  }
   // see books rendered below
   // give form same function as button
   return (
@@ -146,7 +162,8 @@ const Home = () => {
                 </Button>
                 <Button 
                   size="small" 
-                  color="primary">
+                  color="primary"
+                  onClick={() => bookState.handleSaveBook(book)}>
                   Save
                 </Button>
               </CardActions>
