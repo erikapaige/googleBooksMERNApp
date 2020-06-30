@@ -1,7 +1,5 @@
 // bring in react and useState hook
 import React, { useState } from 'react'
-// bring in component from react-router
-import { Link } from 'react-router-dom'
 // bring in axios
 import axios from 'axios'
 // bring in components from material-ui

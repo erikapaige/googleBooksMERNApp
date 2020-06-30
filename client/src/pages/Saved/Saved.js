@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 // bring in components from material-ui
 import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import CardActions from '@material-ui/core/CardActions'
+import CardMedia from '@material-ui/core/CardMedia'
+import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import ButtonBase from '@material-ui/core/ButtonBase'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +37,7 @@ const Saved = () => {
   // setting styles for material-ui components
   const classes = useStyles()
 
+  //set book state
   const [bookState, setBookState] =  useState({
     books: []
   })
@@ -43,59 +46,66 @@ const Saved = () => {
   useEffect(() => {
     axios.get('/api/books')
       .then(({ data }) => {
+        // console.log(data)
         setBookState({ ...bookState, books: data })
       })
       .catch(err => console.error(err))
-  }, [])
+  })
 
   return (
-    <div> Hello World</div>
-    // <div key={book.id} className={classes.root}>
-    //   <Paper className={classes.paper}>
-    //     <Grid container spacing={2}>
-    //       <Grid item>
-    //         <CardMedia
-    //           className={classes.image}
-    //           image={book.volumeInfo.imageLinks.thumbnail}
-    //           alt="book cover" />
-    //       </Grid>
-    //       <Grid item xs={12} sm container>
-    //         <Grid item xs container direction="column" spacing={2}>
-    //           <Grid item xs>
-    //             <Typography gutterBottom variant="h5">
-    //               {book.volumeInfo.title}
-    //             </Typography>
-    //             <Typography gutterBottom variant="h6">
-    //               {book.volumeInfo.authors}
-    //             </Typography>
-    //             <Typography variant="body2" gutterBottom>
-    //               {book.volumeInfo.description}
-    //             </Typography>
-    //             <Typography variant="body2" color="textSecondary">
-    //               {book.link}
-    //             </Typography>
-    //           </Grid>
-    //           <Grid item>
-    //             <CardActions>
-    //               <Button
-    //                 size="small"
-    //                 color="primary"
-    //                 href={book.volumeInfo.infoLink}>
-    //                 View More Info
-    //               </Button>
-    //               <Button
-    //                 size="small"
-    //                 color="primary"
-    //                 onClick={() => bookState.handleSaveBook(book)}>
-    //                 Save
-    //               </Button>
-    //             </CardActions>
-    //           </Grid>
-    //         </Grid>
-    //       </Grid>
-    //     </Grid>
-    //   </Paper>
-    // </div>
+    <div>
+      {
+        bookState.books.map(book => (
+          <div key={book.id} className={classes.root}>
+            <Paper className={classes.paper}>
+              <Grid container spacing={2}>
+                <Grid item>
+                  <CardMedia
+                    className={classes.image}
+                    image={book.source}
+                    alt="book cover" />
+                </Grid>
+                <Grid item xs={12} sm container>
+                  <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs>
+                      <Typography gutterBottom variant="h5">
+                        {book.title}
+                      </Typography>
+                      <Typography gutterBottom variant="h6">
+                        {book.authors}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        {book.description}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {book.link}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          color="primary"
+                          href={book.link}>
+                          View More Info
+                        </Button>
+                        <Button
+                          size="small"
+                          color="primary"
+                          onClick={() => bookState.handleSaveBook(book)}>
+                          Delete
+                        </Button>
+                      </CardActions>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
+        ))
+      }
+    </div>
+    
   )
 }
 
