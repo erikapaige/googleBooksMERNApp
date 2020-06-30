@@ -19,7 +19,6 @@ router.get('/gbooks/:search', (req, res) =>{
                 keep = false
               }
             })
-            // console.log(keep)
             return keep
           })
           res.json(booksFiltered)

@@ -23,12 +23,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
   },
   image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
     margin: 'auto',
     display: 'block',
+    maxWidth: '100%',
     maxHeight: '100%',
   },
 }))
@@ -109,10 +106,12 @@ const Home = () => {
              <Paper className={classes.paper}>
                <Grid container spacing={2}>
                  <Grid item>
-                   <CardMedia 
-                    className={classes.image}
-                    image={book.volumeInfo.imageLinks.smallThumbnail} 
-                    alt="book cover" />
+                    <CardMedia> 
+                    <img 
+                      className={classes.image}
+                      src={book.volumeInfo.imageLinks.smallThumbnail}
+                      alt="book cover" />
+                    </CardMedia>
                  </Grid>
                  <Grid item xs={12} sm container>
                    <Grid item xs container direction="column" spacing={2}>
