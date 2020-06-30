@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
       width: '25ch',
+      // maxWidth: 345,
     },
   },
   form:{
@@ -51,9 +52,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: 'inherit',
-  },
-  root: {
-    maxWidth: 345,
   },
   media: {
     height: 140,
@@ -86,14 +84,14 @@ const Home = () => {
     setBookState({ ...bookState, [event.target.name]: event.target.value })
   }
   // function to search api
-  bookState.handleSearchBook = event =>{
+  bookState.handleSearchBook = event => {
     event.preventDefault()
 
     axios.get(`/api/gbooks/${bookState.search}`)
-      .then(({data}) =>{
+      .then(({ data }) =>{
         console.log(data)
-        setBookState({ ...bookState, books: data })
-        // setBookState({...bookState, books: data.items })
+        // setBookState({ ...bookState, books: data })
+        setBookState({...bookState, books: data.items })
       })
       .catch(err => console.error(err))
   }
@@ -118,7 +116,7 @@ const Home = () => {
       </form>
       <div>
         {
-          bookState.books.map(book =>(
+          bookState.books.map(book => (
             <Card className={classes.root}>
               <CardActionArea>
                 <CardMedia

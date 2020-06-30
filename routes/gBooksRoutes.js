@@ -5,7 +5,7 @@ const axios = require('axios')
 
 router.get('/gbooks/:search', (req, res) =>{
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${req.params.search}&key=${process.env.GBOOKS_API_KEY}`)
-    .then(({data }) =>{
+    .then(({ data }) =>{
       res.json (data)
     })
     .catch(err => console.log(err))
