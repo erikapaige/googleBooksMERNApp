@@ -49,7 +49,7 @@ const Saved = () => {
       .then(() =>{
         const books = JSON.parse(JSON.stringify(bookState.books))
         const booksFiltered = books.filter(boock => boock._id !== book._id)
-        setBookState({ ...bookState, books: booksFiltered})
+        setBookState({ ...bookState, books: booksFiltered })
       })
       .catch(err => console.error(err))
   }
@@ -89,9 +89,6 @@ const Saved = () => {
                       </Typography>
                       <Typography variant="body2" gutterBottom>
                         {book.description}
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        {book.link}
                       </Typography>
                     </Grid>
                     <Grid item>

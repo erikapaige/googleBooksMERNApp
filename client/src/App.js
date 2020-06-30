@@ -12,7 +12,6 @@ import Home from './pages/Home'
 import Saved from './pages/Saved'
 // bring in materia-ui components
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 
 
@@ -33,7 +32,6 @@ const App = () =>{
                 <Saved />
               </Route>
             </Switch>
-          <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '80vh' }} />
         </Container>
         </div>
       </Router>

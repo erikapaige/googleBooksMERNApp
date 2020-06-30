@@ -10,7 +10,7 @@ router.get('/gbooks/:search', (req, res) =>{
       res.json (data)
 
       // console.log the data being returned 
-      console.log(data.items)
+      // console.log(data.items)
     //   Book.find()
     //     .then(books => {
     //       const booksFiltered = data.filter(book => {
