@@ -60,6 +60,7 @@ const Saved = () => {
       .then(({ data }) => {
         // console.log(data)
         setBookState({ ...bookState, books: data })
+    
       })
       .catch(err => console.error(err))
   })
@@ -73,9 +74,10 @@ const Saved = () => {
               <Grid container spacing={2}>
                 <Grid item>
                   <CardMedia>
-                    <img className={classes.image}
-                    image={book.source}
-                    alt="book cover" />
+                    <img 
+                      className={classes.image}
+                      src={book.image}
+                      alt="book cover" />
                   </CardMedia>
                 </Grid>
                 <Grid item xs={12} sm container>

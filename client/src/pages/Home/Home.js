@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: '100%',
     maxHeight: '100%',
   },
 }))
@@ -56,8 +55,7 @@ const Home = () => {
     axios.get(`/api/gbooks/${bookState.search}`)
       .then(({ data }) =>{
         console.log(data)
-        // setBookState({ ...bookState, books: data })
-        setBookState({...bookState, books: data.items })
+        setBookState({ ...bookState, books: data })
       })
       .catch(err => console.error(err))
   }
@@ -70,7 +68,7 @@ const Home = () => {
       title: book.volumeInfo.title,
       authors: book.volumeInfo.authors[0],
       description: book.volumeInfo.description,
-      image: book.volumeInfo.thumbnail,
+      image: book.volumeInfo.imageLinks.smallThumbnail,
       link: book.volumeInfo.infoLink,
       bookId: book.id,
     })
@@ -113,7 +111,7 @@ const Home = () => {
                  <Grid item>
                    <CardMedia 
                     className={classes.image}
-                    image={book.volumeInfo.imageLinks.thumbnail} 
+                    image={book.volumeInfo.imageLinks.smallThumbnail} 
                     alt="book cover" />
                  </Grid>
                  <Grid item xs={12} sm container>

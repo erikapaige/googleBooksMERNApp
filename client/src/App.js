@@ -25,10 +25,10 @@ const App = () =>{
           <CssBaseline />
           <Container maxWidth="sm">
             <Switch>
-              <Route exact path='/'>
+              <Route exact path="/">
                 <Home />
               </Route>
-              <Route exact path='/saved'>
+              <Route exact path="/saved">
                 <Saved />
               </Route>
             </Switch>
