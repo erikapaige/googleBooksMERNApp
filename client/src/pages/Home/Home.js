@@ -15,13 +15,14 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
-      // maxWidth: 345,
+      // width: '25ch',
+      maxWidth: 400,
     },
   },
   form:{
@@ -34,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
+    marginLeft: theme.spacing(10),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -73,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles()
+  
   //search for book
   const [ bookState, setBookState ] = useState({
     search:'',
@@ -109,8 +111,9 @@ const Home = () => {
     })
       .then(() =>{
         const books = bookState.books
-        const booksFiltered= books.filter(boock => boock.id !== book.id)
+        const booksFiltered = books.filter(boock => boock.id !== book.id)
         setBookState({ ...bookState, books: booksFiltered })
+        console.log(books)
       })
       .catch(err => console.error(err))
   }
@@ -118,23 +121,28 @@ const Home = () => {
   // give form same function as button
   return (
     <>
-      <form className={classes.form} onSubmit={bookState.handleSearchBook}>
-        <TextField 
-          label="Search Books" 
-          name="search"
-          value={bookState.search}
-          onChange={bookState.handleInputChange} />
-          <Button 
-            variant="outlined" 
-            color="primary"
-            onClick={bookState.handleSearchBook}>
-              <SearchIcon />
-          </Button>
-      </form>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <form className={classes.form} onSubmit={bookState.handleSearchBook}>
+              <TextField 
+                name="search"
+                value={bookState.search}
+                onChange={bookState.handleInputChange} />
+              <Button 
+                variant="outlined" 
+                color="primary"
+                onClick={bookState.handleSearchBook}>
+                  <SearchIcon />
+              </Button>
+            </form>
+          </Grid>
+        </Grid>
+      </div>  
       <div>
         {
           bookState.books.map(book => (
-            <Card className={classes.root}>
+            <Card key={book.id} className={classes.root}>
               <CardActionArea>
                 <CardMedia
                   component="img"
