@@ -92,11 +92,15 @@ const Home = () => {
     axios.get(`/api/gbooks/${bookState.search}`)
       .then(({data}) =>{
         console.log(data)
-        setBookState({...bookState, books: data.items })
+        setBookState({ ...bookState, books: data })
+        // setBookState({...bookState, books: data.items })
       })
       .catch(err => console.error(err))
   }
+
+
   // see books rendered below
+  // give form same function as button
   return (
     <>
       <form className={classes.form} onSubmit={bookState.handleSearchBook}>
@@ -106,7 +110,8 @@ const Home = () => {
           value={bookState.search}
           onChange={bookState.handleInputChange} />
           <Button 
-            variant="outlined" color="primary"
+            variant="outlined" 
+            color="primary"
             onClick={bookState.handleSearchBook}>
               <SearchIcon />
           </Button>
@@ -141,7 +146,9 @@ const Home = () => {
                   href={book.volumeInfo.infoLink}>
                     View More Info
                 </Button>
-                <Button size="small" color="primary">
+                <Button 
+                  size="small" 
+                  color="primary">
                   Save
                 </Button>
               </CardActions>
