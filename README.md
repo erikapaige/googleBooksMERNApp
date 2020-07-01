@@ -29,6 +29,4 @@ The first is to 'view more info.' This button will redirect the user to the Goog
 
 The second option is for a user to 'save' the book card. Once the 'save' button is clicked the book is stored in the Mongo database and will render on the 'Save' page. 
 
-## Demo
-
 <br>
