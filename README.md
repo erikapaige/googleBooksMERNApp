@@ -2,6 +2,7 @@
 This application allows a user to query and display books based on their search parameters.
 
 ![gBooks Graphic](/assets/googleBookHome.png)
+<br>
 ![gBooks Graphic](/assets/googleBookSaved.png)
 
 ## Installation
@@ -29,7 +30,5 @@ The first is to 'view more info.' This button will redirect the user to the Goog
 The second option is for a user to 'save' the book card. Once the 'save' button is clicked the book is stored in the Mongo database and will render on the 'Save' page. 
 
 ## Demo
-
-(./public/assets/images/listivity.gif)
 
 <br>
