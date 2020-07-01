@@ -28,6 +28,18 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     maxHeight: '100%',
   },
+  form: {
+    padding: theme.spacing(2),
+    margin: '20px',
+    maxWidth: 500,
+  },
+  textSearch: {
+    width: '375px',
+  },
+  searchButton:{
+    marginLeft: '20px',
+    height: '55px'
+  },
 }))
 
 const Home = () => {
@@ -86,10 +98,14 @@ const Home = () => {
           <Grid item xs={12}>
             <form className={classes.form} onSubmit={bookState.handleSearchBook}>
               <TextField 
+                className={classes.textSearch}
                 name="search"
+                variant="outlined"
+                placeholder="Search For a Book..."
                 value={bookState.search}
                 onChange={bookState.handleInputChange} />
               <Button 
+                className={classes.searchButton}
                 variant="outlined" 
                 color="primary"
                 onClick={bookState.handleSearchBook}>
