@@ -66,6 +66,7 @@ const Saved = () => {
       {
         bookState.books.map(book => (
           <div key={book.id} className={classes.root}>
+            <h2>Saved Books</h2>
             <Paper className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item>
