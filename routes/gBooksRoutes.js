@@ -10,6 +10,8 @@ router.get('/gbooks/:search', (req, res) =>{
       
       // console.log the data being returned 
       console.log(data)
+      
+      //filter array to make sure 'save button' doesn't match any of the items we have stored
       Book.find()
         .then(books => {
           const booksFiltered = data.items.filter(book => {
